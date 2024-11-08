@@ -1,6 +1,5 @@
 package org.delivery.db;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
