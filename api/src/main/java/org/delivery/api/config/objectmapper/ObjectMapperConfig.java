@@ -1,4 +1,4 @@
-package org.delivery.api.config.jpa.objectmapper;
+package org.delivery.api.config.objectmapper;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
