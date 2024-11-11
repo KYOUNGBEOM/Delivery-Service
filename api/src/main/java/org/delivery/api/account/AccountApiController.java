@@ -25,6 +25,9 @@ public class AccountApiController {
                 .registeredAt(LocalDateTime.now())
                 .build();
 
+        String a = "안녕하세요";
+        Integer b = Integer.parseInt(a);
+
         return Api.OK(response);
     }
 
