@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.security.PrivateKey;
 import java.security.SignatureException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -23,10 +24,10 @@ public class JwtTokenHelper implements TokenHelperIfs {
     @Value("${token.secret.key}")
     private String secreteKey;
 
-    @Value("${token.access-token-plus-hour}")
+    @Value("${token.access-token.plus-hour}")
     private Long accessTokenPlusHour;
 
-    @Value("${token.refresh-token-plus-hour}")
+    @Value("${token.refresh-token.plus-hour}")
     private Long refreshTokenPlusHour;
 
     @Override
@@ -42,7 +43,7 @@ public class JwtTokenHelper implements TokenHelperIfs {
         SecretKey key = Keys.hmacShaKeyFor(secreteKey.getBytes());
 
         String jwtToken = Jwts.builder()
-                .signWith(key, SignatureAlgorithm.ES256)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .setClaims(data)
                 .setExpiration(expiredAt)
                 .compact();
@@ -54,8 +55,27 @@ public class JwtTokenHelper implements TokenHelperIfs {
     }
 
     @Override
-    public TokenDto issueRefreshToken() {
-        return null;
+    public TokenDto issueRefreshToken(Map<String, Object> data) {
+        LocalDateTime expiredLocalDateTime = LocalDateTime.now().plusHours(refreshTokenPlusHour);
+
+        Date expiredAt = Date.from(
+                expiredLocalDateTime.atZone(
+                        ZoneId.systemDefault()
+                ).toInstant()
+        );
+
+        SecretKey key = Keys.hmacShaKeyFor(secreteKey.getBytes());
+
+        String jwtToken = Jwts.builder()
+                .signWith(key, SignatureAlgorithm.HS256)
+                .setClaims(data)
+                .setExpiration(expiredAt)
+                .compact();
+
+        return TokenDto.builder()
+                .token(jwtToken)
+                .expiredAt(expiredLocalDateTime)
+                .build();
     }
 
     @Override

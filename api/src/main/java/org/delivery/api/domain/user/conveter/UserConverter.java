@@ -1,5 +1,7 @@
 package org.delivery.api.domain.user.conveter;
 
+import lombok.RequiredArgsConstructor;
+import org.delivery.api.common.annotation.Converter;
 import org.delivery.api.common.error.ErrorCode;
 import org.delivery.api.common.exception.ApiException;
 import org.delivery.api.domain.user.controller.model.UserRegisterRequest;
@@ -8,6 +10,8 @@ import org.delivery.db.user.UserEntity;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
+@Converter
 public class UserConverter {
 
     public UserEntity toEntity(UserRegisterRequest request) {
@@ -17,7 +21,7 @@ public class UserConverter {
                             .name(request.getName())
                             .email(request.getEmail())
                             .password(request.getPassword())
-                            .address(request.getPassword())
+                            .address(request.getAddress())
                             .build();
                 }).orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "UserRegisterRequest Null"));
     }

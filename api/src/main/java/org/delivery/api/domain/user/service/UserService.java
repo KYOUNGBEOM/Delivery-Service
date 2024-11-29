@@ -1,27 +1,31 @@
 package org.delivery.api.domain.user.service;
 
+import lombok.RequiredArgsConstructor;
 import org.delivery.api.common.error.ErrorCode;
 import org.delivery.api.common.error.UserErrorCode;
 import org.delivery.api.common.exception.ApiException;
 import org.delivery.db.user.UserEntity;
 import org.delivery.db.user.UserRepository;
 import org.delivery.db.user.enums.UserStatus;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@RequiredArgsConstructor
+@Service
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public UserEntity register(UserEntity userEntity) {
-        return Optional.ofNullable(userEntity)
-                .map(entity -> {
+    public UserEntity register(UserEntity entity) {
+        return Optional.ofNullable(entity)
+                .map(it -> {
                     entity.setStatus(UserStatus.REGISTERED);
                     entity.setRegisteredAt(LocalDateTime.now());
-                    return userRepository.save(userEntity);
+                    return userRepository.save(entity);
                 })
-                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "User Entity null"));
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "User Entity Null"));
     }
 
     public UserEntity login(
