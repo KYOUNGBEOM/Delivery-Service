@@ -35,8 +35,10 @@ public class TokenService {
 
     public Long validationToken(String token) {
         Map<String, Object> map = tokenHelperIfs.validationTokenWithThrow(token);
+
         Object userId = map.get("userId");
         Objects.requireNonNull(userId, () -> {throw new ApiException(ErrorCode.NULL_POINT);});
+
         return Long.parseLong(userId.toString());
     }
 

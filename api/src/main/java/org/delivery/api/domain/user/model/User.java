@@ -1,4 +1,4 @@
-package org.delivery.api.domain.user.controller.model;
+package org.delivery.api.domain.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,22 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.delivery.db.user.enums.UserStatus;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserResponse {
+public class User {
 
     private Long id;
 
     private String name;
+
+    private String password;
 
     private String email;
 

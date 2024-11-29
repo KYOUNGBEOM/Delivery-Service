@@ -33,4 +33,9 @@ public class TokenBusiness {
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }
 
+    public Long validationAccessToken(String accessToken) {
+        Long userId = tokenService.validationToken(accessToken);
+        return userId;
+    }
+
 }
