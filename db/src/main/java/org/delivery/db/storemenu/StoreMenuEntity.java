@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.delivery.db.BaseEntity;
 import org.delivery.db.store.enums.StoreStatus;
+import org.delivery.db.storemenu.enums.StoreMenuStatus;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +34,7 @@ public class StoreMenuEntity extends BaseEntity {
 
     @Column(length = 50, nullable = false)
     @Enumerated(EnumType.STRING)
-    private StoreStatus status;
+    private StoreMenuStatus status;
 
     @Column(length = 200, nullable = false)
     private String thumbnailUrl;
