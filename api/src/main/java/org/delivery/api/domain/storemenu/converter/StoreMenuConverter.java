@@ -34,10 +34,12 @@ public class StoreMenuConverter {
                 .map(it -> {
                     return StoreMenuResponse.builder()
                             .id(storeMenuEntity.getId())
+                            .name(storeMenuEntity.getName())
                             .storeId(storeMenuEntity.getStoreId())
                             .amount(storeMenuEntity.getAmount())
                             .status(storeMenuEntity.getStatus())
                             .thumbnailUrl(storeMenuEntity.getThumbnailUrl())
+                            .likeCount(storeMenuEntity.getLikeCount())
                             .sequence(storeMenuEntity.getSequence())
                             .build();
                 })
