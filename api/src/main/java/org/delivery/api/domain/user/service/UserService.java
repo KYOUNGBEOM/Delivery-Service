@@ -7,6 +7,7 @@ import org.delivery.api.common.exception.ApiException;
 import org.delivery.db.user.UserEntity;
 import org.delivery.db.user.UserRepository;
 import org.delivery.db.user.enums.UserStatus;
+import org.delivery.db.userorder.UserOrderEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -46,7 +47,7 @@ public class UserService {
         ).orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUND));
     }
 
-    public UserEntity getUserWithTrow(
+    public UserEntity getUserWithThrow(
             Long userId
     ) {
         return userRepository.findFirstByIdAndStatusOrderByIdDesc(

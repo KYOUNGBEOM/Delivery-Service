@@ -18,7 +18,7 @@ public class StoreMenuService {
 
     private final StoreMenuRepository storeMenuRepository;
 
-    private StoreMenuEntity getStoreMenuWithThrow(Long id) {
+    public StoreMenuEntity getStoreMenuWithThrow(Long id) {
         Optional<StoreMenuEntity> entity = storeMenuRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreMenuStatus.REGISTERED);
         return entity.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }

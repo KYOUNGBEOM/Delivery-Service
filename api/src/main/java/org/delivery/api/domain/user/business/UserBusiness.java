@@ -37,7 +37,7 @@ public class UserBusiness {
     }
 
     public UserResponse me(User user) {
-        UserEntity userEntity = userService.getUserWithTrow(user.getId());
+        UserEntity userEntity = userService.getUserWithThrow(user.getId());
         UserResponse userResponse = userConverter.toResponse(userEntity);
         return userResponse;
     }
